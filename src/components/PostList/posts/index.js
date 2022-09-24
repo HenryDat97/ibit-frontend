@@ -26,7 +26,7 @@ export default function Post({ post }) {
     }, [post, dispatch])
 
     const onLikeBtnClick = React.useCallback(() => {
-        dispatch(UpdatePostRequest({ ...post, likeCount: post.likeCount + 1 }))
+        dispatch(UpdatePostRequest({ ...post ,likeCount: post.likeCount + 1 }))
     }, [post, dispatch])
 
     return (
@@ -34,7 +34,7 @@ export default function Post({ post }) {
             <CardHeader
                 avatar={<Avatar>A</Avatar>}
                 title={post.author}
-                subheader={moment(post.updatedAt).format('HH:MM MMM DD, YYYY')}
+                subheader={moment(post.createdAt).format('HH:MM MMM DD, YYYY')}
                 action={
                     <IconButton onClick={onDeleteBtnClick}>
                         <Delete />
