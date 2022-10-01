@@ -43,11 +43,34 @@ function* deletePostSaga(action) {
     }
 }
 
+function* createUserSaga(action) {
+    try {
+        const user = yield call(api.createUser, action.payload)
+        yield put(actions.createUserSuccess(user.data))
+    } catch (error) {
+        console.log(error)
+        yield put(actions.createUserFailure(error))
+    }
+}
+
+function* findUserSaga(action) {
+    try {
+        const user = yield call(api.findUser, action.payload)
+        yield put(actions.findUserSuccess(user.data))
+    }
+    catch(err) {
+        console.log(err)
+        yield put(actions.findUserFailure(err))
+    }
+}
+
 function* mySaga() {
     yield takeLatest(actions.getPostsRequest, fetchPostsSaga)
     yield takeLatest(actions.CreatePostRequest, createPostSaga)
     yield takeLatest(actions.UpdatePostRequest, updatePostSaga)
     yield takeLatest(actions.DeletePostRequest, deletePostSaga)
+    yield takeLatest(actions.createUserRequest, createUserSaga)
+    yield takeLatest(actions.findUserRequest, findUserSaga)
 }
 
 export default mySaga

@@ -19,7 +19,7 @@ export default function postsReducers(state = INIT_STATE.posts, action) {
             return {
                 ...state,
                 isLoading: false,
-                data: action.payload,
+                data: action.payload
             }
         case GETPOSTSFAILURE:
             return {

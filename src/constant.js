@@ -5,5 +5,9 @@ export const INIT_STATE = {
     },
     modal: {
         isShow: false
+    },
+    users: {
+        isLogged: false,
+        data: []
     }
 }

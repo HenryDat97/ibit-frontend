@@ -2,18 +2,22 @@
 import { Button, Modal, TextareaAutosize, TextField } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import FileBase64 from 'react-file-base64'
-import React from 'react'
+import React, { useContext } from 'react'
 // Import Components
 import { modalState$ } from '../../redux/selectors'
 import { hideModal } from '../../redux/actions'
 import useStyles from './styles'
 import * as actions from '../../redux/actions'
+import { AuthContext } from '../provider/AuthContext'
 
 export default function CreatePostModal() {
+    // currentUser -> author = currentUser
+    const currentUser  = useContext(AuthContext)
     // React Hook Variables
     const [data, setData] = React.useState({
         title: '',
         content: '',
+        author: currentUser.data.name,
         attachment: '',
     })
     //...
@@ -27,7 +31,6 @@ export default function CreatePostModal() {
     }, [disptach])
 
     const onSubmit = React.useCallback(() => {
-        console.log({data})
         disptach(actions.CreatePostRequest(data))
         disptach(actions.hideModal())
     }, [data, disptach])
